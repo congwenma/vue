@@ -24,6 +24,7 @@ export let isUpdatingChildComponent: boolean = false
 export function initLifecycle (vm: Component) {
   const options = vm.$options
 
+  // NOTE: whats abstract parent?!, keep looking up the parent's parent... until that parent's abstract === false or no more parent, add current element to that parent's children
   // locate first non-abstract parent
   let parent = options.parent
   if (parent && !options.abstract) {
@@ -33,6 +34,7 @@ export function initLifecycle (vm: Component) {
     parent.$children.push(vm)
   }
 
+  // NOTE: inversely set $root, $parent, and initializes properties
   vm.$parent = parent
   vm.$root = parent ? parent.$root : vm
 

@@ -62,6 +62,7 @@ if (process.env.NODE_ENV !== 'production') {
     }
   }
 
+  // NOTE: polyfill proxy
   initProxy = function initProxy (vm) {
     if (hasProxy) {
       // determine which proxy handler to use
@@ -71,6 +72,7 @@ if (process.env.NODE_ENV !== 'production') {
         : hasHandler
       vm._renderProxy = new Proxy(vm, handlers)
     } else {
+      // NOTE: hmm ?! what does Vue do when no proxy? just set _renderProxy to the component?
       vm._renderProxy = vm
     }
   }
